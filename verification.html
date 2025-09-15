@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="DBTAadhaar Verification" data-hi="डीबीटीआधार सत्यापन">DBTAadhaar Verification</title>
+    <style>
+        /* Color Palette and General Styles */
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f4f4f4; /* Ash */
+            --accent-color: #fce38a; /* A softer light yellow */
+            --text-color: #333;
+            --heading-color: #0056b3; /* A deep blue for contrast */
+            --border-color: #e0e0e0;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding-top: 80px;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Theme Toggle */
+        [data-theme="dark"] {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #2c2c4a;
+            --accent-color: #4c7cff;
+            --text-color: #e0e0e0;
+            --heading-color: #fff;
+            --border-color: #555;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: var(--secondary-bg);
+            border-bottom: 2px solid var(--accent-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--heading-color);
+            text-decoration: none;
+        }
+        .navbar-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .navbar-links a:hover {
+            background-color: #ddd;
+        }
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+        }
+        .toggle-btn {
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        /* Profile Section and Vertical Nav */
+        .profile-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .profile-section {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ccc;
+            border: 2px solid var(--heading-color);
+        }
+        .profile-info {
+            margin-left: 10px;
+        }
+        .profile-info h4 {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        .vertical-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 200px;
+            flex-direction: column;
+            padding: 10px 0;
+        }
+        .vertical-nav a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            display: block;
+            white-space: nowrap;
+            transition: background-color 0.2s;
+        }
+        .vertical-nav a:hover {
+            background-color: #e9ecef;
+        }
+        .profile-section:hover .vertical-nav {
+            display: flex;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: var(--primary-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .container h1 {
+            color: var(--heading-color);
+            margin-bottom: 20px;
+        }
+        .verification-form {
+            text-align: left;
+            margin-top: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent-color);
+            color: var(--heading-color);
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">DBTAadhaar</a>
+        <div class="navbar-actions">
+            <a href="account_details.html" class="profile-link">
+                <div class="profile-section">
+                    <img src="https://i.pravatar.cc/40" alt="Profile Picture" class="profile-img">
+                    <div class="profile-info">
+                        <h4 data-en="Your Name" data-hi="आपका नाम">Your Name</h4>
+                        <span data-en="Aadhaar: XXXX-XXXX-1234" data-hi="आधार: XXXX-XXXX-1234">Aadhaar: XXXX-XXXX-1234</span>
+                    </div>
+                    <div class="vertical-nav">
+                        <a href="verification.html" data-en="Verification" data-hi="सत्यापन">Verification</a>
+                        <a href="account_details.html" data-en="Account Details" data-hi="खाता विवरण">Account Details</a>
+                        <a href="status_check.html" data-en="Status Check" data-hi="स्थिति जांच">Status Check</a>
+                        <a href="services.html" data-en="Services" data-hi="सेवाएं">Services</a>
+                        <a href="help.html" data-en="Help" data-hi="सहायता">Help</a>
+                        <a href="#" id="logoutBtn" data-en="Log Out" data-hi="लॉग आउट">Log Out</a>
+                    </div>
+                </div>
+            </a>
+            <span class="toggle-btn" id="lang-toggle" data-en="HI" data-hi="EN">HI</span>
+            <span class="toggle-btn" id="theme-toggle">🌙</span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 data-en="Aadhaar and Digilocker Verification" data-hi="आधार और डिजीलॉकर सत्यापन">Aadhaar and Digilocker Verification</h1>
+        <p data-en="To proceed with DBT registration, please fill out the form below. This process uses Digilocker's open source API to verify your Aadhaar details securely." data-hi="डीबीटी पंजीकरण के साथ आगे बढ़ने के लिए, कृपया नीचे दिए गए फॉर्म को भरें। यह प्रक्रिया आपके आधार विवरण को सुरक्षित रूप से सत्यापित करने के लिए डिजीलॉकर के ओपन सोर्स एपीआई का उपयोग करती है।">To proceed with DBT registration, please fill out the form below. This process uses Digilocker's open source API to verify your Aadhaar details securely.</p>
+        <div class="verification-form">
+            <form id="verificationForm">
+                <div class="form-group">
+                    <label for="fullName" data-en="Full Name" data-hi="पूरा नाम">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="aadhaarNumber" data-en="Aadhaar Number" data-hi="आधार संख्या">Aadhaar Number</label>
+                    <input type="text" id="aadhaarNumber" name="aadhaarNumber" pattern="[0-9]{12}" title="12-digit Aadhaar number" required>
+                </div>
+                <div class="form-group">
+                    <label for="mobileNumber" data-en="Mobile Number" data-hi="मोबाइल नंबर">Mobile Number</label>
+                    <input type="tel" id="mobileNumber" name="mobileNumber" pattern="[0-9]{10}" title="10-digit mobile number" required>
+                </div>
+                <div class="form-group">
+                    <label for="universityName" data-en="University/College Name" data-hi="विश्वविद्यालय/कॉलेज का नाम">University/College Name</label>
+                    <input type="text" id="universityName" name="universityName" required>
+                </div>
+                <button type="submit" class="submit-btn" data-en="Verify with Digilocker" data-hi="डिजीलॉकर से सत्यापित करें">Verify with Digilocker</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            'en': {
+                'DBTAadhaar Verification': 'DBTAadhaar Verification',
+                'Verification': 'Verification',
+                'Account Details': 'Account Details',
+                'Status Check': 'Status Check',
+                'Services': 'Services',
+                'Help': 'Help',
+                'Log Out': 'Log Out',
+                'Your Name': 'Your Name',
+                'Aadhaar: XXXX-XXXX-1234': 'Aadhaar: XXXX-XXXX-1234',
+                'Aadhaar and Digilocker Verification': 'Aadhaar and Digilocker Verification',
+                'To proceed with DBT registration, please fill out the form below. This process uses Digilocker\'s open source API to verify your Aadhaar details securely.': 'To proceed with DBT registration, please fill out the form below. This process uses Digilocker\'s open source API to verify your Aadhaar details securely.',
+                'Full Name': 'Full Name',
+                'Aadhaar Number': 'Aadhaar Number',
+                'Mobile Number': 'Mobile Number',
+                'University/College Name': 'University/College Name',
+                'Verify with Digilocker': 'Verify with Digilocker'
+            },
+            'hi': {
+                'DBTAadhaar Verification': 'डीबीटीआधार सत्यापन',
+                'Verification': 'सत्यापन',
+                'Account Details': 'खाता विवरण',
+                'Status Check': 'स्थिति जांच',
+                'Services': 'सेवाएं',
+                'Help': 'सहायता',
+                'Log Out': 'लॉग आउट',
+                'Your Name': 'आपका नाम',
+                'Aadhaar: XXXX-XXXX-1234': 'आधार: XXXX-XXXX-1234',
+                'Aadhaar and Digilocker Verification': 'आधार और डिजीलॉकर सत्यापन',
+                'To proceed with DBT registration, please fill out the form below. This process uses Digilocker\'s open source API to verify your Aadhaar details securely.': 'डीबीटी पंजीकरण के साथ आगे बढ़ने के लिए, कृपया नीचे दिए गए फॉर्म को भरें। यह प्रक्रिया आपके आधार विवरण को सुरक्षित रूप से सत्यापित करने के लिए डिजीलॉकर के ओपन सोर्स एपीआई का उपयोग करती है।',
+                'Full Name': 'पूरा नाम',
+                'Aadhaar Number': 'आधार संख्या',
+                'Mobile Number': 'मोबाइल नंबर',
+                'University/College Name': 'विश्वविद्यालय/कॉलेज का नाम',
+                'Verify with Digilocker': 'डिजीलॉकर से सत्यापित करें'
+            }
+        };
+
+        const langToggle = document.getElementById('lang-toggle');
+        const themeToggle = document.getElementById('theme-toggle');
+        const logoutBtn = document.getElementById('logoutBtn');
+        let currentLang = localStorage.getItem('lang') || 'en';
+        let currentTheme = localStorage.getItem('theme') || 'light';
+
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        langToggle.textContent = currentLang === 'en' ? 'HI' : 'EN';
+        updateContent();
+
+        function updateContent() {
+            document.querySelectorAll('[data-en], [data-hi]').forEach(elem => {
+                const translationKey = elem.dataset.en;
+                if (translations[currentLang][translationKey]) {
+                    elem.textContent = translations[currentLang][translationKey];
+                }
+            });
+        }
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            localStorage.setItem('lang', currentLang);
+            langToggle.textContent = currentLang === 'en' ? 'HI' : 'EN';
+            updateContent();
+        });
+
+        themeToggle.addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        });
+
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'login.html';
+        });
+
+        // Form submission (for demo purposes)
+        document.getElementById('verificationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Verification form submitted! A real application would now process this via a backend and the Digilocker API.');
+        });
+    </script>
+</body>
+</html>

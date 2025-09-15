@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="DBTAadhaar Account Details" data-hi="डीबीटीआधार खाता विवरण">DBTAadhaar Account Details</title>
+    <style>
+        /* Color Palette and General Styles */
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f4f4f4; /* Ash */
+            --accent-color: #fce38a; /* A softer light yellow */
+            --text-color: #333;
+            --heading-color: #0056b3; /* A deep blue for contrast */
+            --border-color: #e0e0e0;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding-top: 80px;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Theme Toggle */
+        [data-theme="dark"] {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #2c2c4a;
+            --accent-color: #4c7cff;
+            --text-color: #e0e0e0;
+            --heading-color: #fff;
+            --border-color: #555;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: var(--secondary-bg);
+            border-bottom: 2px solid var(--accent-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--heading-color);
+            text-decoration: none;
+        }
+        .navbar-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .navbar-links a:hover {
+            background-color: #ddd;
+        }
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+        }
+        .toggle-btn {
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        .profile-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: var(--primary-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .profile-container h1 {
+            color: var(--heading-color);
+            margin-bottom: 20px;
+        }
+        .profile-details {
+            text-align: left;
+            margin-top: 30px;
+        }
+        .profile-details p {
+            font-size: 1.1em;
+            margin: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .profile-details p span {
+            font-weight: bold;
+            display: inline-block;
+            width: 180px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">DBTAadhaar</a>
+        <div class="navbar-links">
+            <a href="verification.html" data-en="Verification" data-hi="सत्यापन">Verification</a>
+            <a href="account_details.html" data-en="Account Details" data-hi="खाता विवरण">Account Details</a>
+            <a href="status_check.html" data-en="Status Check" data-hi="स्थिति जांच">Status Check</a>
+        </div>
+        <div class="navbar-actions">
+            <span class="toggle-btn" id="lang-toggle" data-en="HI" data-hi="EN">HI</span>
+            <span class="toggle-btn" id="theme-toggle">🌙</span>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <h1 data-en="Your Account & Profile Details" data-hi="आपकी खाता और प्रोफाइल विवरण">Your Account & Profile Details</h1>
+        <div class="profile-details">
+            <p><span data-en="Full Name:" data-hi="पूरा नाम:">Full Name:</span> <span data-en="John Doe" data-hi="जॉन डो">John Doe</span></p>
+            <p><span data-en="Aadhaar Number:" data-hi="आधार संख्या:">Aadhaar Number:</span> <span data-en="XXXX XXXX 1234" data-hi="XXXX XXXX 1234">XXXX XXXX 1234</span></p>
+            <p><span data-en="Seeded Bank:" data-hi="सीडेड बैंक:">Seeded Bank:</span> <span data-en="State Bank of India" data-hi="भारतीय स्टेट बैंक">State Bank of India</span></p>
+            <p><span data-en="Bank Account Number:" data-hi="बैंक खाता संख्या:">Bank Account Number:</span> <span data-en="XXXXXXXXXXXX5678" data-hi="XXXXXXXXXXXX5678">XXXXXXXXXXXX5678</span></p>
+            <p><span data-en="IFSC Code:" data-hi="आईएफएससी कोड:">IFSC Code:</span> <span data-en="SBIN0001234" data-hi="SBIN0001234">SBIN0001234</span></p>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            'en': {
+                'DBTAadhaar Account Details': 'DBTAadhaar Account Details',
+                'Verification': 'Verification',
+                'Account Details': 'Account Details',
+                'Status Check': 'Status Check',
+                'Your Account & Profile Details': 'Your Account & Profile Details',
+                'Full Name:': 'Full Name:',
+                'John Doe': 'John Doe',
+                'Aadhaar Number:': 'Aadhaar Number:',
+                'XXXX XXXX 1234': 'XXXX XXXX 1234',
+                'Seeded Bank:': 'Seeded Bank:',
+                'State Bank of India': 'State Bank of India',
+                'Bank Account Number:': 'Bank Account Number:',
+                'XXXXXXXXXXXX5678': 'XXXXXXXXXXXX5678',
+                'IFSC Code:': 'IFSC Code:',
+                'SBIN0001234': 'SBIN0001234'
+            },
+            'hi': {
+                'DBTAadhaar Account Details': 'डीबीटीआधार खाता विवरण',
+                'Verification': 'सत्यापन',
+                'Account Details': 'खाता विवरण',
+                'Status Check': 'स्थिति जांच',
+                'Your Account & Profile Details': 'आपकी खाता और प्रोफाइल विवरण',
+                'Full Name:': 'पूरा नाम:',
+                'John Doe': 'जॉन डो',
+                'Aadhaar Number:': 'आधार संख्या:',
+                'XXXX XXXX 1234': 'XXXX XXXX 1234',
+                'Seeded Bank:': 'सीडेड बैंक:',
+                'State Bank of India': 'भारतीय स्टेट बैंक',
+                'Bank Account Number:': 'बैंक खाता संख्या:',
+                'XXXXXXXXXXXX5678': 'XXXXXXXXXXXX5678',
+                'IFSC Code:': 'आईएफएससी कोड:',
+                'SBIN0001234': 'SBIN0001234'
+            }
+        };
+
+        const langToggle = document.getElementById('lang-toggle');
+        const themeToggle = document.getElementById('theme-toggle');
+        let currentLang = localStorage.getItem('lang') || 'en';
+        let currentTheme = localStorage.getItem('theme') || 'light';
+
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        langToggle.textContent = currentLang === 'en' ? 'HI' : 'EN';
+        updateContent();
+
+        function updateContent() {
+            document.querySelectorAll('[data-en], [data-hi]').forEach(elem => {
+                const translationKey = elem.dataset.en;
+                if (translations[currentLang][translationKey]) {
+                    elem.textContent = translations[currentLang][translationKey];
+                }
+            });
+        }
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            localStorage.setItem('lang', currentLang);
+            langToggle.textContent = currentLang === 'en' ? 'HI' : 'EN';
+            updateContent();
+        });
+
+        themeToggle.addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>

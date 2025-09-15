@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="DBTAadhaar Status Check" data-hi="डीबीटीआधार स्थिति जांच">DBTAadhaar Status Check</title>
+    <style>
+        /* Color Palette and General Styles */
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f4f4f4; /* Ash */
+            --accent-color: #fce38a; /* A softer light yellow */
+            --text-color: #333;
+            --heading-color: #0056b3; /* A deep blue for contrast */
+            --border-color: #e0e0e0;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding-top: 80px;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Theme Toggle */
+        [data-theme="dark"] {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #2c2c4a;
+            --accent-color: #4c7cff;
+            --text-color: #e0e0e0;
+            --heading-color: #fff;
+            --border-color: #555;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: var(--secondary-bg);
+            border-bottom: 2px solid var(--accent-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--heading-color);
+            text-decoration: none;
+        }
+        .navbar-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .navbar-links a:hover {
+            background-color: #ddd;
+        }
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+        }
+        .toggle-btn {
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: var(--primary-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .container h1 {
+            color: var(--heading-color);
+            margin-bottom: 20px;
+        }
+
+        .status-check-form {
+            text-align: left;
+            margin: 30px auto;
+            max-width: 400px;
+        }
+        .status-check-form label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .status-check-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+        }
+        .status-check-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent-color);
+            color: var(--heading-color);
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .status-check-form button:hover {
+            background-color: #ddd;
+        }
+
+        #status-result {
+            margin-top: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .status-seeded {
+            color: green;
+        }
+        .status-unseeded {
+            color: red;
+        }
+
+        .disclaimer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">DBTAadhaar</a>
+        <div class="navbar-links">
+            <a href="verification.html" data-en="Verification" data-hi="सत्यापन">Verification</a>
+            <a href="account_details.html" data-en="Account Details" data-hi="खाता विवरण">Account Details</a>
+            <a href="status_check.html" data-en="Status Check" data-hi="स्थिति जांच">Status Check</a>
+        </div>
+        <div class="navbar-actions">
+            <span class="toggle-btn" id="lang-toggle" data-en="HI" data-hi="EN">HI</span>
+            <span class="toggle-btn" id="theme-toggle">🌙</span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 data-en="Aadhaar Seeding Status" data-hi="आधार सीडिंग स्थिति">Aadhaar Seeding Status</h1>
+        <p data-en="Check the seeding status of your Aadhaar with a bank account." data-hi="अपने आधार की बैंक खाते से सीडिंग स्थिति की जाँच करें।">Check the seeding status of your Aadhaar with a bank account.</p>
+        
+        <div class="status-check-form">
+            <label for="aadhaarNumberCheck" data-en="Enter 12-digit Aadhaar Number" data-hi="12-अंकीय आधार संख्या दर्ज करें">Enter 12-digit Aadhaar Number</label>
+            <input type="text" id="aadhaarNumberCheck" name="aadhaarNumberCheck" pattern="[0-9]{12}" title="12-digit Aadhaar number" required>
+            <button id="checkStatusBtn" data-en="Check Status" data-hi="स्थिति जांचें">Check Status</button>
+        </div>
+
+        <div id="status-result"></div>
+
+        <p class="disclaimer" data-en="*This is a simulated feature for demonstration purposes at the hackathon. In a real-world application, this functionality would be handled by a secure backend and APIs provided by government entities like NPCI." data-hi="*यह हैकाथॉन में प्रदर्शन के उद्देश्य से एक नकली सुविधा है। वास्तविक दुनिया के अनुप्रयोग में, यह कार्यक्षमता एनपीसीआई जैसी सरकारी संस्थाओं द्वारा प्रदान किए गए एक सुरक्षित बैकएंड और एपीआई द्वारा संभाली जाएगी।">*This is a simulated feature for demonstration purposes at the hackathon. In a real-world application, this functionality would be handled by a secure backend and APIs provided by government entities like NPCI.</p>
+    </div>
+
+    <script>
+        const translations = {
+            'en': {
+                'DBTAadhaar Status Check': 'DBTAadhaar Status Check',
+                'Verification': 'Verification',
+                'Account Details': 'Account Details',
+                'Status Check': 'Status Check',
+                'Aadhaar Seeding Status': 'Aadhaar Seeding Status',
+                'Check the seeding status of your Aadhaar with a bank account.': 'Check the seeding status of your Aadhaar with a bank account.',
+                'Enter 12-digit Aadhaar Number': 'Enter 12-digit Aadhaar Number',
+                'Check Status': 'Check Status',
+                'Aadhaar number is successfully seeded.': 'Aadhaar number is successfully seeded.',
+                'Aadhaar number is not seeded with any bank account.': 'Aadhaar number is not seeded with any bank account.',
+                'Please enter a valid 12-digit Aadhaar number.': 'Please enter a valid 12-digit Aadhaar number.',
+                '*This is a simulated feature for demonstration purposes at the hackathon. In a real-world application, this functionality would be handled by a secure backend and APIs provided by government entities like NPCI.': '*This is a simulated feature for demonstration purposes at the hackathon. In a real-world application, this functionality would be handled by a secure backend and APIs provided by government entities like NPCI.'
+            },
+            'hi': {
+                'DBTAadhaar Status Check': 'डीबीटीआधार स्थिति जांच',
+                'Verification': 'सत्यापन',
+                'Account Details': 'खाता विवरण',
+                'Status Check': 'स्थिति जांच',
+                'Aadhaar Seeding Status': 'आधार सीडिंग स्थिति',
+                'Check the seeding status of your Aadhaar with a bank account.': 'अपने आधार की बैंक खाते से सीडिंग स्थिति की जाँच करें।',
+                'Enter 12-digit Aadhaar Number': '12-अंकीय आधार संख्या दर्ज करें',
+                'Check Status': 'स्थिति जांचें',
+                'Aadhaar number is successfully seeded.': 'आधार संख्या सफलतापूर्वक सीड की गई है।',
+                'Aadhaar number is not seeded with any bank account.': 'आधार संख्या किसी भी बैंक खाते से सीड नहीं की गई है।',
+                'Please enter a valid 12-digit Aadhaar number.': 'कृपया एक वैध 12-अंकीय आधार संख्या दर्ज करें।',
+                '*This is a simulated feature for demonstration purposes at the hackathon. In a real-world application, this functionality would be handled by a secure backend and APIs provided by government entities like NPCI.': '*यह हैकाथॉन में प्रदर्शन के उद्देश्य से एक नकली सुविधा है। वास्तविक दुनिया के अनुप्रयोग में, यह कार्यक्षमता एनपीसीआई जैसी सरकारी संस्थाओं द्वारा प्रदान किए गए एक सुरक्षित बैकएंड और एपीआई द्वारा संभाली जाएगी।'
+            }
+        };
+
+        const langToggle = document.getElementById('lang-toggle');
+        const themeToggle = document.getElementById('theme-toggle');
+        const checkStatusBtn = document.getElementById('checkStatusBtn');
+        const aadhaarInput = document.getElementById('aadhaarNumberCheck');
+        const statusResult = document.getElementById('status-result');
+        
+        let currentLang = localStorage.getItem('lang') || 'en';
+        let currentTheme = localStorage.getItem('theme') || 'light';
+
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        langToggle.textContent = currentLang === 'en' ? 'HI' : 'EN';
+        updateContent();
+
+        function updateContent() {
+            document.querySelectorAll('[data-en], [data-hi]').forEach(elem => {
+                const translationKey = elem.dataset.en;
+                if (translations[currentLang][translationKey]) {
+                    elem.textContent = translations[currentLang][translationKey];
+                }
+            });
+        }
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            localStorage.setItem('lang', currentLang);
+            langToggle.textContent = currentLang === 'en' ? 'HI' : 'EN';
+            updateContent();
+        });
+
+        themeToggle.addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        });
+
+        checkStatusBtn.addEventListener('click', () => {
+            const aadhaarNumber = aadhaarInput.value.trim();
+            statusResult.textContent = '';
+            statusResult.className = '';
+
+            // Simulated logic for demonstration
+            const seededAccounts = ["123456789012", "987654321098"];
+            const unseededAccounts = ["111122223333", "444455556666"];
+
+            if (aadhaarNumber.length !== 12 || !/^\d+$/.test(aadhaarNumber)) {
+                statusResult.textContent = translations[currentLang]['Please enter a valid 12-digit Aadhaar number.'];
+                statusResult.classList.add('status-unseeded');
+            } else if (seededAccounts.includes(aadhaarNumber)) {
+                statusResult.textContent = translations[currentLang]['Aadhaar number is successfully seeded.'];
+                statusResult.classList.add('status-seeded');
+            } else if (unseededAccounts.includes(aadhaarNumber)) {
+                statusResult.textContent = translations[currentLang]['Aadhaar number is not seeded with any bank account.'];
+                statusResult.classList.add('status-unseeded');
+            } else {
+                statusResult.textContent = translations[currentLang]['Aadhaar number is not seeded with any bank account.'];
+                statusResult.classList.add('status-unseeded');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="DBTAadhaar Profile" data-hi="डीबीटीआधार प्रोफाइल">DBTAadhaar Profile</title>
+    <style>
+        /* Color Palette and General Styles */
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f4f4f4; /* Ash */
+            --accent-color: #fffacd; /* Light Yellow */
+            --text-color: #333;
+            --heading-color: #0056b3; /* A deep blue for contrast */
+            --border-color: #e0e0e0;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding-top: 80px;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Theme Toggle */
+        [data-theme="dark"] {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #2c2c4a;
+            --accent-color: #4c7cff;
+            --text-color: #e0e0e0;
+            --heading-color: #fff;
+            --border-color: #555;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: var(--secondary-bg);
+            border-bottom: 2px solid var(--accent-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--heading-color);
+            text-decoration: none;
+        }
+        .navbar-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .navbar-links a:hover {
+            background-color: #ddd;
+        }
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+        }
+        .toggle-btn {
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        .profile-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: var(--primary-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .profile-container h1 {
+            color: var(--heading-color);
+            margin-bottom: 20px;
+        }
+        .profile-details {
+            text-align: left;
+            margin-top: 30px;
+        }
+        .profile-details p {
+            font-size: 1.1em;
+            margin: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .profile-details p span {
+            font-weight: bold;
+            display: inline-block;
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">DBTAadhaar</a>
+        <div class="navbar-links">
+            <a href="index.html" data-en="Home" data-hi="होम">Home</a>
+            <a href="services.html" data-en="Services" data-hi="सेवाएं">Services</a>
+        </div>
+        <div class="navbar-actions">
+            <span class="toggle-btn" id="lang-toggle" data-en="HI" data-hi="EN">HI</span>
+            <span class="toggle-btn" id="theme-toggle">🌙</span>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <h1 data-en="Your Profile" data-hi="आपकी प्रोफाइल">Your Profile</h1>
+        <div class="profile-details">
+            <p><span data-en="Name:" data-hi="नाम:">Name:</span> <span data-en="John Doe" data-hi="जॉन डो">John Doe</span></p>
+            <p><span data-en="Aadhaar Number:" data-hi="आधार संख्या:">Aadhaar Number:</span> <span data-en="XXXX XXXX 1234" data-hi="XXXX XXXX 1234">XXXX XXXX 1234</span></p>
+            <p><span data-en="Date of Birth:" data-hi="जन्मतिथि:">Date of Birth:</span> <span data-en="01/01/1990" data-hi="01/01/1990">01/01/1990</span></p>
+            <p><span data-en="Address:" data-hi="पता:">Address:</span> <span data-en="123, Main Street, New Delhi" data-hi="123, मेन स्ट्रीट, नई दिल्ली">123, Main Street, New Delhi</span></p>
+            <p><span data-en="Mobile Number:" data-hi="मोबाइल नंबर:">Mobile Number:</span> <span data-en="XXXXXXXX99" data-hi="XXXXXXXX99">XXXXXXXX99</span></p>
+            <p><span data-en="Email:" data-hi="ईमेल:">Email:</span> <span data-en="johndoe@example.com" data-hi="johndoe@example.com">johndoe@example.com</span></p>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            'en': {
+                'DBTAadhaar Profile': 'DBTAadhaar Profile',
+                'Home': 'Home',
+                'Services': 'Services',
+                'Your Profile': 'Your Profile',
+                'Name:': 'Name:',
+                'John Doe': 'John Doe',
+                'Aadhaar Number:': 'Aadhaar Number:',
+                'XXXX XXXX 1234': 'XXXX XXXX 1234',
+                'Date of Birth:': 'Date of Birth:',
+                '01/01/1990': '01/01/1990',
+                'Address:': 'Address:',
+                '123, Main Street, New Delhi': '123, Main Street, New Delhi',
+                'Mobile Number:': 'Mobile Number:',
+                'XXXXXXXX99': 'XXXXXXXX99',
+                'Email:': 'Email:',
+                'johndoe@example.com': 'johndoe@example.com'
+            },
+            'hi': {
+                'DBTAadhaar Profile': 'डीबीटीआधार प्रोफाइल',
+                'Home': 'होम',
+                'Services': 'सेवाएं',
+                'Your Profile': 'आपकी प्रोफाइल',
+                'Name:': 'नाम:',
+                'John Doe': 'जॉन डो',
+                'Aadhaar Number:': 'आधार संख्या:',
+                'XXXX XXXX 1234': 'XXXX XXXX 1234',
+                'Date of Birth:': 'जन्मतिथि:',
+                '01/01/1990': '01/01/1990',
+                'Address:': 'पता:',
+                '123, Main Street, New Delhi': '123, मेन स्ट्रीट, नई दिल्ली',
+                'Mobile Number:': 'मोबाइल नंबर:',
+                'XXXXXXXX99': 'XXXXXXXX99',
+                'Email:': 'ईमेल:',
+                'johndoe@example.com': 'johndoe@example.com'
+            }
+        };
+
+        const langToggle = document.getElementById('lang-toggle');
+        const themeToggle = document.getElementById('theme-toggle');
+        let currentLang = 'en';
+
+        const savedLang = localStorage.getItem('lang') || 'en';
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        currentLang = savedLang;
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        langToggle.textContent = savedLang === 'en' ? 'HI' : 'EN';
+        updateContent();
+
+        function updateContent() {
+            document.querySelectorAll('[data-en], [data-hi]').forEach(elem => {
+                const translationKey = elem.dataset.en;
+                if (translations[currentLang][translationKey]) {
+                    elem.textContent = translations[currentLang][translationKey];
+                }
+            });
+        }
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            localStorage.setItem('lang', currentLang);
+            langToggle.textContent = currentLang === 'en' ? 'HI' : 'EN';
+            updateContent();
+        });
+
+        themeToggle.addEventListener('click', () => {
+                const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>

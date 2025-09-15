@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="DBTAadhaar Services" data-hi="डीबीटीआधार सेवाएं">DBTAadhaar Services</title>
+    <style>
+        /* Color Palette and General Styles */
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f4f4f4; /* Ash */
+            --accent-color: #fce38a; /* A softer light yellow */
+            --text-color: #333;
+            --heading-color: #0056b3; /* A deep blue for contrast */
+            --border-color: #e0e0e0;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 80px 20px 20px;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Theme Toggle */
+        [data-theme="dark"] {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #2c2c4a;
+            --accent-color: #4c7cff;
+            --text-color: #e0e0e0;
+            --heading-color: #fff;
+            --border-color: #555;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: var(--secondary-bg);
+            border-bottom: 2px solid var(--accent-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--heading-color);
+            text-decoration: none;
+        }
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+        }
+        .toggle-btn {
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        /* 2x2 Grid Layout */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .service-box {
+            background-color: var(--secondary-bg);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        .service-box:hover {
+            transform: translateY(-5px);
+        }
+        .service-box h3 {
+            color: var(--heading-color);
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        .service-box p {
+            color: var(--text-color);
+            font-size: 1em;
+        }
+        .service-box a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: var(--accent-color);
+            color: var(--heading-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .service-box a:hover {
+            background-color: #ddd;
+        }
+        
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">DBTAadhaar</a>
+        <div class="navbar-actions">
+            <span class="toggle-btn" id="lang-toggle" data-en="HI" data-hi="EN">HI</span>
+            <span class="toggle-btn" id="theme-toggle">🌙</span>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="services-grid">
+            <div class="service-box">
+                <h3 data-en="Request New Aadhaar Seeding" data-hi="नए आधार सीडिंग का अनुरोध करें">Request New Aadhaar Seeding</h3>
+                <p data-en="Link your bank account with your Aadhaar number to receive government subsidies directly." data-hi="सरकारी सब्सिडी सीधे प्राप्त करने के लिए अपने बैंक खाते को अपने आधार नंबर से लिंक करें।">Link your bank account with your Aadhaar number to receive government subsidies directly.</p>
+                <a href="#" data-en="Start Now" data-hi="अभी शुरू करें">Start Now</a>
+            </div>
+            <div class="service-box">
+                <h3 data-en="Check Seeded Bank Account" data-hi="सीडेड बैंक खाता जांचें">Check Seeded Bank Account</h3>
+                <p data-en="Verify which bank account is currently seeded with your Aadhaar number." data-hi="सत्यापित करें कि आपका आधार नंबर वर्तमान में किस बैंक खाते से सीडेड है।">Verify which bank account is currently seeded with your Aadhaar number.</p>
+                <a href="#" data-en="Check Status" data-hi="स्थिति जांचें">Check Status</a>
+            </div>
+            <div class="service-box">
+                <h3 data-en="Request Aadhaar Move" data-hi="आधार हस्तांतरण का अनुरोध करें">Request Aadhaar Move</h3>
+                <p data-en="Move your Aadhaar linkage from one bank account to another for DBT purposes." data-hi="डीबीटी उद्देश्यों के लिए अपने आधार लिंक को एक बैंक खाते से दूसरे बैंक खाते में स्थानांतरित करें।">Move your Aadhaar linkage from one bank account to another for DBT purposes.</p>
+                <a href="#" data-en="Request Move" data-hi="स्थानांतरण का अनुरोध करें">Request Move</a>
+            </div>
+            <div class="service-box">
+                <h3 data-en="Track Scholarship Status" data-hi="छात्रवृत्ति स्थिति ट्रैक करें">Track Scholarship Status</h3>
+                <p data-en="Follow the status of your scholarship application from submission to final disbursal." data-hi="अपनी छात्रवृत्ति आवेदन की स्थिति को जमा करने से लेकर अंतिम वितरण तक ट्रैक करें।">Follow the status of your scholarship application from submission to final disbursal.</p>
+                <a href="#" data-en="Track Status" data-hi="स्थिति ट्रैक करें">Track Status</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Language Translation
+        const translations = {
+            'en': {
+                'DBTAadhaar Services': 'DBTAadhaar Services',
+                'Request New Aadhaar Seeding': 'Request New Aadhaar Seeding',
+                'Link your bank account with your Aadhaar number to receive government subsidies directly.': 'Link your bank account with your Aadhaar number to receive government subsidies directly.',
+                'Start Now': 'Start Now',
+                'Check Seeded Bank Account': 'Check Seeded Bank Account',
+                'Verify which bank account is currently seeded with your Aadhaar number.': 'Verify which bank account is currently seeded with your Aadhaar number.',
+                'Check Status': 'Check Status',
+                'Request Aadhaar Move': 'Request Aadhaar Move',
+                'Move your Aadhaar linkage from one bank account to another for DBT purposes.': 'Move your Aadhaar linkage from one bank account to another for DBT purposes.',
+                'Request Move': 'Request Move',
+                'Track Scholarship Status': 'Track Scholarship Status',
+                'Follow the status of your scholarship application from submission to final disbursal.': 'Follow the status of your scholarship application from submission to final disbursal.',
+                'Track Status': 'Track Status'
+            },
+            'hi': {
+                'DBTAadhaar Services': 'डीबीटीआधार सेवाएं',
+                'Request New Aadhaar Seeding': 'नए आधार सीडिंग का अनुरोध करें',
+                'Link your bank account with your Aadhaar number to receive government subsidies directly.': 'सरकारी सब्सिडी सीधे प्राप्त करने के लिए अपने बैंक खाते को अपने आधार नंबर से लिंक करें।',
+                'Start Now': 'अभी शुरू करें',
+                'Check Seeded Bank Account': 'सीडेड बैंक खाता जांचें',
+                'Verify which bank account is currently seeded with your Aadhaar number.': 'सत्यापित करें कि आपका आधार नंबर वर्तमान में किस बैंक खाते से सीडेड है।',
+                'Check Status': 'स्थिति जांचें',
+                'Request Aadhaar Move': 'आधार हस्तांतरण का अनुरोध करें',
+                'Move your Aadhaar linkage from one bank account to another for DBT purposes.': 'डीबीटी उद्देश्यों के लिए अपने आधार लिंक को एक बैंक खाते से दूसरे बैंक खाते में स्थानांतरित करें।',
+                'Request Move': 'स्थानांतरण का अनुरोध करें',
+                'Track Scholarship Status': 'छात्रवृत्ति स्थिति ट्रैक करें',
+                'Follow the status of your scholarship application from submission to final disbursal.': 'अपनी छात्रवृत्ति आवेदन की स्थिति को जमा करने से लेकर अंतिम वितरण तक ट्रैक करें।',
+                'Track Status': 'स्थिति ट्रैक करें'
+            }
+        };
+
+        const langToggle = document.getElementById('lang-toggle');
+        const themeToggle = document.getElementById('theme-toggle');
+        let currentLang = localStorage.getItem('lang') || 'en';
+        let currentTheme = localStorage.getItem('theme') || 'light';
+
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        langToggle.textContent = currentLang === 'en' ? 'HI' : 'EN';
+        updateContent();
+
+        function updateContent() {
+            document.querySelectorAll('[data-en], [data-hi]').forEach(elem => {
+                const translationKey = elem.dataset.en;
+                if (translations[currentLang][translationKey]) {
+                    elem.textContent = translations[currentLang][translationKey];
+                }
+            });
+        }
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            localStorage.setItem('lang', currentLang);
+            langToggle.textContent = currentLang === 'en' ? 'HI' : 'EN';
+            updateContent();
+        });
+
+        themeToggle.addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>

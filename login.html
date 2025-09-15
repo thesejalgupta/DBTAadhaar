@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBTAadhaar Login</title>
+    <style>
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f0f0f0; /* Lighter Ash */
+            --accent-color: #fdb81e; /* Brighter, professional yellow */
+            --text-color: #212121;
+            --heading-color: #002868; /* Navy Blue for authority */
+            --border-color: #d1d1d1;
+            --button-text: #002868;
+        }
+        [data-theme="dark"] {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #333333;
+            --accent-color: #4c7cff;
+            --text-color: #e0e0e0;
+            --heading-color: #fff;
+            --border-color: #555;
+            --button-text: #fff;
+        }
+        body {
+            font-family: 'Public Sans', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: var(--secondary-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            border-top: 5px solid var(--heading-color);
+        }
+        .login-container h1 {
+            color: var(--heading-color);
+            margin-bottom: 20px;
+            font-size: 2.2em;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+        }
+        .input-group input:focus {
+            outline: 2px solid var(--accent-color);
+            border-color: transparent;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--accent-color);
+            color: var(--button-text);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .login-btn:hover {
+            background-color: #ffc94d;
+        }
+        .error-message {
+            color: #d9534f;
+            margin-top: 15px;
+            font-size: 1em;
+        }
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle" id="theme-toggle">🌙</div>
+    <div class="login-container">
+        <h1>Login with Aadhaar</h1>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="aadharNumber">Aadhaar Number</label>
+                <input type="text" id="aadharNumber" name="aadharNumber" placeholder="Enter 12-digit Aadhaar number" required>
+            </div>
+            <button type="submit" class="login-btn" id="loginBtn">Login</button>
+            <div id="error-message" class="error-message"></div>
+        </form>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const aadharInput = document.getElementById('aadharNumber');
+        const errorMessage = document.getElementById('error-message');
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+        themeToggle.addEventListener('click', () => {
+            let newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const aadharNumber = aadharInput.value.trim();
+            if (aadharNumber.length === 12 && /^\d+$/.test(aadharNumber)) {
+                const otp = prompt("A simulated OTP has been sent to your registered mobile number. Please enter any 4-digit number to proceed:");
+                if (otp && otp.length === 4 && /^\d+$/.test(otp)) {
+                    alert('Aadhaar and OTP are valid. Redirecting to dashboard.');
+                    window.location.href = 'index.html';
+                } else {
+                    errorMessage.textContent = 'Invalid OTP. Please try again.';
+                }
+            } else {
+                errorMessage.textContent = 'Please enter a valid 12-digit Aadhaar number.';
+            }
+        });
+    </script>
+</body>
+</html>

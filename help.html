@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="DBTAadhaar Help" data-hi="डीबीटीआधार सहायता">DBTAadhaar Help</title>
+    <style>
+        /* Color Palette and General Styles */
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f4f4f4; /* Ash */
+            --accent-color: #fce38a; /* A softer light yellow */
+            --text-color: #333;
+            --heading-color: #0056b3; /* A deep blue for contrast */
+            --border-color: #e0e0e0;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding-top: 80px;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Theme Toggle */
+        [data-theme="dark"] {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #2c2c4a;
+            --accent-color: #4c7cff;
+            --text-color: #e0e0e0;
+            --heading-color: #fff;
+            --border-color: #555;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: var(--secondary-bg);
+            border-bottom: 2px solid var(--accent-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--heading-color);
+            text-decoration: none;
+        }
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+        }
+        .toggle-btn {
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        /* Profile Section and Vertical Nav */
+        .profile-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .profile-section {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ccc;
+            border: 2px solid var(--heading-color);
+        }
+        .profile-info {
+            margin-left: 10px;
+        }
+        .profile-info h4 {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        .vertical-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 200px;
+            flex-direction: column;
+            padding: 10px 0;
+        }
+        .vertical-nav a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            display: block;
+            white-space: nowrap;
+            transition: background-color 0.2s;
+        }
+        .vertical-nav a:hover {
+            background-color: #e9ecef;
+        }
+        .profile-section:hover .vertical-nav {
+            display: flex;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        .content-section {
+            padding: 40px;
+            margin-top: 20px;
+            background-color: var(--primary-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .content-section h2 {
+            color: var(--heading-color);
+            margin-bottom: 20px;
+        }
+
+        /* Chatbot Section */
+        #chatbot-container {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        #chat-log {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #f9f9f9;
+        }
+        .message {
+            padding: 10px;
+            border-radius: 15px;
+            max-width: 80%;
+        }
+        .user-message {
+            align-self: flex-end;
+            background-color: #add8e6; /* light blue */
+            color: #333;
+            border-bottom-right-radius: 0;
+        }
+        .bot-message {
+            align-self: flex-start;
+            background-color: #e0e0e0;
+            color: #333;
+            border-bottom-left-radius: 0;
+        }
+        #chat-input-container {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--primary-bg);
+        }
+        #chat-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+        }
+        #chat-send-btn, #speech-toggle-btn {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-left: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">DBTAadhaar</a>
+        <div class="navbar-actions">
+            <a href="account_details.html" class="profile-link">
+                <div class="profile-section">
+                    <img src="https://i.pravatar.cc/40" alt="Profile Picture" class="profile-img">
+                    <div class="profile-info">
+                        <h4 data-en="Your Name" data-hi="आपका नाम">Your Name</h4>
+                        <span data-en="Aadhaar: XXXX-XXXX-1234" data-hi="आधार: XXXX-XXXX-1234">Aadhaar: XXXX-XXXX-1234</span>
+                    </div>
+                    <div class="vertical-nav">
+                        <a href="verification.html" data-en="Verification" data-hi="सत्यापन">Verification</a>
+                        <a href="account_details.html" data-en="Account Details" data-hi="खाता विवरण">Account Details</a>
+                        <a href="status_check.html" data-en="Status Check" data-hi="स्थिति जांच">Status Check</a>
+                        <a href="services.html" data-en="Services" data-hi="सेवाएं">Services</a>
+                        <a href="help.html" data-en="Help" data-hi="सहायता">Help</a>
+                        <a href="#" id="logoutBtn" data-en="Log Out" data-hi="लॉग आउट">Log Out</a>
+                    </div>
+                </div>
+            </a>
+            <span class="toggle-btn" id="lang-toggle" data-en="HI" data-hi="EN">HI</span>
+            <span class="toggle-btn" id="theme-toggle">🌙</span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="content-section" id="help-section">
+            <h2 data-en="Help & Support" data-hi="सहायता और समर्थन">Help & Support</h2>
+            <div id="chatbot-container">
+                <div id="chat-log">
+                    <div class="message bot-message" data-en="Hello! How can I help you today?" data-hi="नमस्ते! आज मैं आपकी क्या मदद कर सकता हूँ?">Hello! How can I help you today?</div>
+                </div>
+                <div id="chat-input-container">
+                    <input type="text" id="chat-input" placeholder="Type your message..." data-en-placeholder="Type your message..." data-hi-placeholder="अपना संदेश टाइप करें...">
+                    <button id="chat-send-btn" data-en="Send" data-hi="भेजें">Send</button>
+                    <button id="speech-toggle-btn">🎤</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const translations = {
+            'en': {
+                'DBTAadhaar Help': 'DBTAadhaar Help',
+                'Verification': 'Verification',
+                'Account Details': 'Account Details',
+                'Status Check': 'Status Check',
+                'Services': 'Services',
+                'Help': 'Help',
+                'Log Out': 'Log Out',
+                'Your Name': 'Your Name',
+                'Aadhaar: XXXX-XXXX-1234': 'Aadhaar: XXXX-XXXX-1234',
+                'Help & Support': 'Help & Support',
+                'chat_greeting': 'Hello! How can I help you today?',
+                'chat_help_navigation': 'This website has several sections: Verification, Account Details, Status Check, Services, and Help. You can use the navigation bar to move between them.',
+                'chat_help_verification': 'The verification page is where you can securely link your Aadhaar with your bank account for DBT.',
+                'chat_help_status': 'You can track the progress of your scholarship or other government benefits on the Status Check page.',
+                'chat_help_general': 'For more information on Aadhaar and DBT, please visit the official government websites linked on this page.',
+                'chat_not_found': 'I\'m sorry, I can only answer questions related to Aadhaar, DBT, and how to navigate the website.',
+                'Type your message...': 'Type your message...',
+                'Send': 'Send'
+            },
+            'hi': {
+                'DBTAadhaar Help': 'डीबीटीआधार सहायता',
+                'Verification': 'सत्यापन',
+                'Account Details': 'खाता विवरण',
+                'Status Check': 'स्थिति जांच',
+                'Services': 'सेवाएं',
+                'Help': 'सहायता',
+                'Log Out': 'लॉग आउट',
+                'Your Name': 'आपका नाम',
+                'Aadhaar: XXXX-XXXX-1234': 'आधार: XXXX-XXXX-1234',
+                'Help & Support': 'सहायता और समर्थन',
+                'chat_greeting': 'नमस्ते! आज मैं आपकी क्या मदद कर सकता हूँ?',
+                'chat_help_navigation': 'इस वेबसाइट में कई अनुभाग हैं: सत्यापन, खाता विवरण, स्थिति जांच, सेवाएं, और सहायता। आप उनके बीच जाने के लिए नेविगेशन बार का उपयोग कर सकते हैं।',
+                'chat_help_verification': 'सत्यापन पृष्ठ वह जगह है जहाँ आप डीबीटी के लिए अपने आधार को अपने बैंक खाते से सुरक्षित रूप से लिंक कर सकते हैं।',
+                'chat_help_status': 'आप स्थिति जांच पृष्ठ पर अपनी छात्रवृत्ति या अन्य सरकारी लाभों की प्रगति को ट्रैक कर सकते हैं।',
+                'chat_help_general': 'आधार और डीबीटी के बारे में अधिक जानकारी के लिए, कृपया इस पृष्ठ पर लिंक की गई आधिकारिक सरकारी वेबसाइटों पर जाएँ।',
+                'chat_not_found': 'मुझे खेद है, मैं केवल आधार, डीबीटी और वेबसाइट नेविगेशन से संबंधित सवालों का जवाब दे सकता हूँ।',
+                'Type your message...': 'अपना संदेश टाइप करें...',
+                'Send': 'भेजें'
+            }
+        };
+
+        const langToggle = document.getElementById('lang-toggle');
+        const themeToggle = document.getElementById('theme-toggle');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const chatLog = document.getElementById('chat-log');
+        const chatInput = document.getElementById('chat-input');
+        const chatSendBtn = document.getElementById('chat-send-btn');
+        const speechToggleBtn = document.getElementById('speech-toggle-btn');
+        let speechRecognition;
+
+        let currentLang = localStorage.getItem('lang') || 'en';
+        let currentTheme = localStorage.getItem('theme') || 'light';
+
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        langToggle.textContent = currentLang === 'en' ? 'HI' : 'EN';
+        updateContent();
+
+        function updateContent() {
+            document.querySelectorAll('[data-en], [data-hi]').forEach(elem => {
+                const translationKey = elem.dataset.en;
+                if (translations[currentLang][translationKey]) {
+                    elem.textContent = translations[currentLang][translationKey];
+                }
+            });
+            document.querySelectorAll('[data-en-placeholder], [data-hi-placeholder]').forEach(elem => {
+                const placeholderKey = elem.dataset.enPlaceholder;
+                if (translations[currentLang][placeholderKey]) {
+                    elem.placeholder = translations[currentLang][placeholderKey];
+                }
+            });
+        }
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            localStorage.setItem('lang', currentLang);
+            langToggle.textContent = currentLang === 'en' ? 'HI' : 'EN';
+            updateContent();
+        });
+
+        themeToggle.addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        });
+
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'login.html';
+        });
+
+        // Chatbot Functionality
+        const addMessage = (text, sender) => {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
+            messageDiv.textContent = text;
+            chatLog.appendChild(messageDiv);
+            chatLog.scrollTop = chatLog.scrollHeight;
+            if (sender === 'bot') {
+                speakText(text);
+            }
+        };
+
+        const getBotResponse = (userMessage) => {
+            const lowerCaseMessage = userMessage.toLowerCase();
+            let botResponse = translations[currentLang].chat_not_found;
+            
+            // Keywords for both languages
+            const keywords = {
+                'navigation': ['navigate', 'navigation', 'वेबसाइट नेविगेशन', 'कैसे नेविगेट करें'],
+                'verification': ['verification', 'verify', 'सत्यापन', 'सत्यापित करें'],
+                'status': ['status', 'check status', 'स्थिति जांचें', 'स्थिति', 'ट्रैक', 'track'],
+                'general': ['dbt', 'aadhaar', 'आधार', 'डीबीटी'],
+                'greeting': ['hello', 'hi', 'नमस्ते', 'namaste']
+            };
+
+            for (const key in keywords) {
+                if (keywords[key].some(keyword => lowerCaseMessage.includes(keyword.toLowerCase()))) {
+                    botResponse = translations[currentLang][`chat_help_${key}`] || translations[currentLang][`chat_${key}`];
+                    break;
+                }
+            }
+
+            addMessage(botResponse, 'bot');
+        };
+
+        const sendMessage = () => {
+            const userMessage = chatInput.value.trim();
+            if (userMessage) {
+                addMessage(userMessage, 'user');
+                chatInput.value = '';
+                getBotResponse(userMessage);
+            }
+        };
+
+        chatSendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Speech-to-Text and Text-to-Speech
+        const speakText = (text) => {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = currentLang === 'en' ? 'en-US' : 'hi-IN';
+                speechSynthesis.speak(utterance);
+            }
+        };
+
+        speechToggleBtn.addEventListener('click', () => {
+            if (speechRecognition) {
+                speechRecognition.stop();
+                speechRecognition = null;
+                speechToggleBtn.textContent = '🎤';
+                return;
+            }
+            if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                speechRecognition = new SpeechRecognition();
+                speechRecognition.lang = currentLang === 'en' ? 'en-US' : 'hi-IN';
+                speechRecognition.interimResults = false;
+                speechRecognition.maxAlternatives = 1;
+                speechRecognition.start();
+                speechToggleBtn.textContent = '🛑';
+                speechRecognition.onresult = (event) => {
+                    const speechResult = event.results[0][0].transcript;
+                    chatInput.value = speechResult;
+                    sendMessage();
+                    speechRecognition.stop();
+                    speechToggleBtn.textContent = '🎤';
+                };
+                speechRecognition.onend = () => {
+                    speechRecognition = null;
+                    speechToggleBtn.textContent = '🎤';
+                };
+                speechRecognition.onerror = (event) => {
+                    console.error('Speech recognition error:', event.error);
+                    speechRecognition.stop();
+                    speechToggleBtn.textContent = '🎤';
+                };
+            } else {
+                alert('Your browser does not support Speech Recognition.');
+            }
+        });
+    </script>
+</body>
+</html>
